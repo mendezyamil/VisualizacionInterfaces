@@ -5,7 +5,7 @@ let canvas = document.getElementById('canvas');
 canvas.addEventListener('mousedown', activar);
 canvas.addEventListener('mouseup', desactivar);
 canvas.addEventListener('mousemove',
-function(evento){
+function lapiz(evento){
   let mousePos = getMousePos(canvas, evento);
   let mouseX = mousePos.x;
   let mouseY = mousePos.y;
@@ -39,4 +39,9 @@ function getMousePos(canvas, evento){
   let borrar = document.getElementById('borrar');
   borrar.addEventListener('click', function(e){
     color = "#FFFFFF";
+  });
+
+  let lapiz = document.getElementById('lapiz');
+  lapiz.addEventListener('click', function(e){
+    color = "#000000";
   });
