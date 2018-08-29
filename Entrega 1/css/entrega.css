@@ -1,0 +1,7 @@
+canvas{
+  border: 1px solid black;
+}
+
+.herramientas :hover{
+  border: solid black 1px;
+}
