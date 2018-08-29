@@ -53,11 +53,30 @@ function getMousePos(canvas, evento){
     color = document.getElementById('colores').value;
   });
 
-  guardarImagen = document.getElementById('guardar');
+  let guardarImagen = document.getElementById('guardar');
   guardarImagen.addEventListener('click', function(){
     let canvas = document.getElementById('canvas');
     let imagen = canvas.toDataURL("image/png");
     this.href = imagen;
   });
 
-//pintar canvas en blanco 
+  let nuevo = document.getElementById('nuevo');
+  nuevo.addEventListener('click', function(){
+    let ctx = document.getElementById("canvas").getContext("2d");
+    var imageData = ctx.createImageData(600, 500);
+
+  	for (x=0; x < 600; x++){
+  		for (y=0; y < 500; y++){
+  			SetPixel(imageData, x, y, 255, 255, 255, 255);
+  		}
+  	}
+  	ctx.putImageData(imageData, 0, 0);
+
+  	function SetPixel(imageData, x, y, r, g, b, a){
+  		index = (x+y*imageData.width)*4;
+  		imageData.data[index+0] = r;
+  		imageData.data[index+1] = g;
+  		imageData.data[index+2] = b;
+  		imageData.data[index+3] = a;
+  	}
+  });
