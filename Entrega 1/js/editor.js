@@ -35,3 +35,8 @@ function getMousePos(canvas, evento){
       ctx.fillRect(posx, posy, tamanio, tamanio);
     }
   }
+
+  let borrar = document.getElementById('borrar');
+  borrar.addEventListener('click', function(e){
+    color = "#FFFFFF";
+  });
