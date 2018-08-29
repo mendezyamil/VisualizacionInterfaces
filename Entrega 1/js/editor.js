@@ -52,3 +52,12 @@ function getMousePos(canvas, evento){
   color.addEventListener('change', function(){
     color = document.getElementById('colores').value;
   });
+
+  guardarImagen = document.getElementById('guardar');
+  guardarImagen.addEventListener('click', function(){
+    let canvas = document.getElementById('canvas');
+    let imagen = canvas.toDataURL("image/png");
+    this.href = imagen;
+  });
+
+//pintar canvas en blanco 
