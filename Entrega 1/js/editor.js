@@ -39,9 +39,11 @@ function getMousePos(canvas, evento){
   let borrar = document.getElementById('borrar');
   borrar.addEventListener('click', function(e){
     color = "#FFFFFF";
+    document.getElementById('colores').setAttribute("disabled", "");
   });
 
   let lapiz = document.getElementById('lapiz');
   lapiz.addEventListener('click', function(e){
-    color = "#000000";
+    color = document.getElementById('colores').value;
+    document.getElementById('colores').removeAttribute("disabled", "");
   });
