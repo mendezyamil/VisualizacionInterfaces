@@ -47,3 +47,8 @@ function getMousePos(canvas, evento){
     color = document.getElementById('colores').value;
     document.getElementById('colores').removeAttribute("disabled", "");
   });
+
+  color = document.getElementById('colores');
+  color.addEventListener('change', function(){
+    color = document.getElementById('colores').value;
+  });
