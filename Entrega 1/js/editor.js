@@ -123,7 +123,7 @@ function getMousePos(canvas, evento){
       }
       reader.readAsDataURL(e.target.files[0]);
   }
-  
+
   //NEGATIVO
   let negativo = document.getElementById('negativo');
   negativo.addEventListener("click", function (){
@@ -136,6 +136,23 @@ function getMousePos(canvas, evento){
       imagen.data[i] = 255-imagen.data[i];
       imagen.data[i+1] = 255-imagen.data[i+1];
       imagen.data[i+2] = 255-imagen.data[i+2];
+    }
+    ctx.putImageData(imagen, 0, 0);
+  }
+
+  //ESCALA DE GRISES
+  let grises = document.getElementById('grises');
+  grises.addEventListener("click", function (){
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    cambiarColoresGrises(imgData);
+  });
+
+  function cambiarColoresGrises(imagen){
+    for(i=0; i < imagen.data.length; i+=4){
+     var cambio = (imagen.data[i] + imagen.data[i+1] + imagen.data[i+2]) / 3;
+     imagen.data[i] = cambio;
+     imagen.data[i+1] = cambio;
+     imagen.data[i+2] = cambio;
     }
     ctx.putImageData(imagen, 0, 0);
   }
