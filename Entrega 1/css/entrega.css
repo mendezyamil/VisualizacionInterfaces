@@ -1,5 +1,10 @@
-canvas{
+.canvas{
   border: 1px solid black;
+}
+
+.herramientas{
+  width: 30px;
+  height: 30px;
 }
 
 .herramientas :hover{

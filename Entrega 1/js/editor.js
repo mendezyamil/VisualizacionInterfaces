@@ -2,6 +2,9 @@ let color = "#000000";
 let tamanio = 10;
 let pintura = false;
 let canvas = document.getElementById('canvas');
+let ctx = canvas.getContext('2d');
+let lastX = -1;
+let lastY = -1;
 canvas.addEventListener('mousedown', activar);
 canvas.addEventListener('mouseup', desactivar);
 canvas.addEventListener('mousemove',
@@ -18,6 +21,8 @@ function activar(){
 
 function desactivar(){
   pintura = false;
+  lastX = -1;
+  lastY = -1;
 }
 
 function getMousePos(canvas, evento){
@@ -31,8 +36,18 @@ function getMousePos(canvas, evento){
   function draw(canvas, posx, posy){
     let ctx = canvas.getContext('2d');
     if(pintura){
-      ctx.fillStyle = color;
-      ctx.fillRect(posx, posy, tamanio, tamanio);
+      ctx.lineCap = "round"; //dibujo redondeado
+       ctx.lineWidth = 10;//grosor
+       ctx.strokeStyle = color;
+       ctx.beginPath();//voy a empezar a dibujar
+       ctx.moveTo(posx,posy);
+       if(lastX != -1 && lastY != -1){
+           ctx.moveTo(lastX, lastY);
+       }
+       ctx.lineTo(posx, posy); //hacemos la linea hasta
+       ctx.stroke();//ahora dibujalo
+       lastX = posx;
+       lastY = posy;
     }
   }
 
@@ -61,9 +76,9 @@ function getMousePos(canvas, evento){
   });
 
   let nuevo = document.getElementById('nuevo');
-  nuevo.addEventListener('click', function(){
+  nuevo.addEventListener('click', function canvasNuevo(){
     let ctx = document.getElementById("canvas").getContext("2d");
-    var imageData = ctx.createImageData(600, 500);
+    var imageData = ctx.createImageData(900, 450);
 
   	for (x=0; x < 600; x++){
   		for (y=0; y < 500; y++){
@@ -80,3 +95,31 @@ function getMousePos(canvas, evento){
   		imageData.data[index+3] = a;
   	}
   });
+
+//CARGAR IMAGEN
+  let cargar = document.getElementById('cargar');
+  cargar.addEventListener('change', cargarImagen, false);
+  //canvasNuevo(); hacer que antes de cargar una imagen se borre la anterior
+  function cargarImagen(e){
+      var reader = new FileReader();
+      reader.onload = function(event){
+          var img = new Image();
+          img.onload = function(){
+            if(img.width>canvas.width || img.height>canvas.height){
+              let porcentaje;
+              if(img.width>img.height){
+                porcentaje = (canvas.width/img.width) * 100;
+              }
+              else{
+                porcentaje = (canvas.height/img.height) * 100;
+              }
+              img.width = ( porcentaje * img.width ) / 100;
+              img.height = ( porcentaje * img.height ) / 100;
+            }
+
+            ctx.drawImage(img,0,0, img.width, img.height);
+          }
+          img.src = event.target.result;
+      }
+      reader.readAsDataURL(e.target.files[0]);
+  }
