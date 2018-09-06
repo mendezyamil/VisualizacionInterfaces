@@ -5,6 +5,7 @@ let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let lastX = -1;
 let lastY = -1;
+//TRAZAR LINEA
 canvas.addEventListener('mousedown', activar);
 canvas.addEventListener('mouseup', desactivar);
 canvas.addEventListener('mousemove',
@@ -51,23 +52,28 @@ function getMousePos(canvas, evento){
     }
   }
 
+//SELECCIONAR BORRAR
   let borrar = document.getElementById('borrar');
   borrar.addEventListener('click', function(e){
     color = "#FFFFFF";
     document.getElementById('colores').setAttribute("disabled", "");
   });
 
+//SELECCIONAR DIBUJAR
   let lapiz = document.getElementById('lapiz');
   lapiz.addEventListener('click', function(e){
     color = document.getElementById('colores').value;
     document.getElementById('colores').removeAttribute("disabled", "");
   });
 
+//SELECCIONAR COLOR
   color = document.getElementById('colores');
   color.addEventListener('change', function(){
     color = document.getElementById('colores').value;
   });
 
+
+//GUARDAR IMAGEN
   let guardarImagen = document.getElementById('guardar');
   guardarImagen.addEventListener('click', function(){
     let canvas = document.getElementById('canvas');
@@ -75,6 +81,7 @@ function getMousePos(canvas, evento){
     this.href = imagen;
   });
 
+//DOCUMENTO NUEVO
   let nuevo = document.getElementById('nuevo');
   nuevo.addEventListener('click', function canvasNuevo(){
     let ctx = document.getElementById("canvas").getContext("2d");
@@ -101,27 +108,26 @@ function getMousePos(canvas, evento){
   cargar.addEventListener('change', cargarImagen, false);
   //canvasNuevo(); hacer que antes de cargar una imagen se borre la anterior
   function cargarImagen(e){
-      var reader = new FileReader();
-      reader.onload = function(event){
-          var img = new Image();
-          img.onload = function(){
-            if(img.width>canvas.width || img.height>canvas.height){
-              let porcentaje;
-              if(img.width>img.height){
-                porcentaje = (canvas.width/img.width) * 100;
-              }
-              else{
-                porcentaje = (canvas.height/img.height) * 100;
-              }
-              img.width = ( porcentaje * img.width ) / 100;
-              img.height = ( porcentaje * img.height ) / 100;
-            }
-
-            ctx.drawImage(img,0,0, img.width, img.height);
+    let reader = new FileReader();
+    reader.onload = function(event){
+      let img = new Image();
+      img.onload = function(){
+        if(img.width>canvas.width || img.height>canvas.height){
+          let porcentaje;
+          if(img.width>img.height){
+            porcentaje = (canvas.width/img.width) * 100;
           }
-          img.src = event.target.result;
+          else{
+            porcentaje = (canvas.height/img.height) * 100;
+          }
+          img.width = ( porcentaje * img.width ) / 100;
+          img.height = ( porcentaje * img.height ) / 100;
+        }
+        ctx.drawImage(img,0,0, img.width, img.height);
       }
-      reader.readAsDataURL(e.target.files[0]);
+      img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);
   }
 
   //NEGATIVO
@@ -167,7 +173,6 @@ function getMousePos(canvas, evento){
   function cambiarColoresSepia(imagen){
     pixels = imagen.data,
     numPixels = imagen.width*imagen.height;
-
     for ( var i = 0; i < numPixels; i++ ) {
       var r = pixels[ i * 4 ];
       var g = pixels[ i * 4 + 1 ];
@@ -183,3 +188,19 @@ function getMousePos(canvas, evento){
     }
     ctx.putImageData( imagen, 0, 0 );
   }
+
+//BRILLO
+let brillo = document.getElementById('brillo');
+brillo.addEventListener("click", function (){
+  let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  cambiarBrillo(imgData);
+});
+
+function cambiarBrillo(imagen){
+    for(i=0; i < imagen.data.length; i+=4){
+      imagen.data[i] = imagen.data[i] + 10;
+      imagen.data[i+1] = imagen.data[i+1] + 10;
+      imagen.data[i+2] = imagen.data[i+2] + 10;
+    }
+  ctx.putImageData(imagen, 0, 0);
+}

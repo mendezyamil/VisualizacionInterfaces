@@ -2,11 +2,14 @@
   border: 1px solid black;
 }
 
-.herramientas{
-  width: 30px;
-  height: 30px;
+body{
+  background-color: #151515;
 }
 
-.herramientas :hover{
-  border: solid black 1px;
+#canvas{
+  background-color: white;
+}
+
+nav{
+  margin-top: 2%;
 }
