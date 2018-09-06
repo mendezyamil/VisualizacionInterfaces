@@ -204,3 +204,26 @@ function cambiarBrillo(imagen){
     }
   ctx.putImageData(imagen, 0, 0);
 }
+
+//BINARIZACION
+let binarizacion = document.getElementById('binarizacion');
+binarizacion.addEventListener("click", function (){
+  let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  cambiarColoresGrises(imgData);
+});
+
+function cambiarColoresGrises(imagen){
+  for(i=0; i < imagen.data.length; i+=4){
+    let promedio = (imagen.data[i] + imagen.data[i+1] + imagen.data[i+2]) / 3;
+    if(promedio<128){
+      imagen.data[i] = 0;
+      imagen.data[i+1] = 0;
+      imagen.data[i+2] = 0;
+    }else{
+      imagen.data[i] = 255;
+      imagen.data[i+1] = 255;
+      imagen.data[i+2] = 255;
+    }
+  }
+  ctx.putImageData(imagen, 0, 0);
+}
