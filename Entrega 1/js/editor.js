@@ -1,10 +1,16 @@
 let color = "#000000";
-let tamanio = 10;
 let pintura = false;
+let tamanio = 5;
 let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let lastX = -1;
 let lastY = -1;
+
+//GROSOR LINEA
+let grosor = document.getElementById('grosor');
+grosor.addEventListener('change', function(e){
+  tamanio = parseInt(grosor.value);
+});
 //TRAZAR LINEA
 canvas.addEventListener('mousedown', activar);
 canvas.addEventListener('mouseup', desactivar);
@@ -38,7 +44,7 @@ function getMousePos(canvas, evento){
     let ctx = canvas.getContext('2d');
     if(pintura){
       ctx.lineCap = "round"; //dibujo redondeado
-       ctx.lineWidth = 10;//grosor
+       ctx.lineWidth = tamanio;//grosor
        ctx.strokeStyle = color;
        ctx.beginPath();//voy a empezar a dibujar
        ctx.moveTo(posx,posy);
@@ -56,7 +62,7 @@ function getMousePos(canvas, evento){
   let borrar = document.getElementById('borrar');
   borrar.addEventListener('click', function(e){
     color = "#FFFFFF";
-    document.getElementById('colores').setAttribute("disabled", "");
+    document.getElementById('colores').setAttribute("disabled", ""); //bloquea la seleccion de colores
   });
 
 //SELECCIONAR DIBUJAR
