@@ -215,10 +215,10 @@ function cambiarBrillo(imagen){
 let binarizacion = document.getElementById('binarizacion');
 binarizacion.addEventListener("click", function (){
   let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  cambiarColoresGrises(imgData);
+  cambiarColoresBinarizacion(imgData);
 });
 
-function cambiarColoresGrises(imagen){
+function cambiarColoresBinarizacion(imagen){
   for(i=0; i < imagen.data.length; i+=4){
     let promedio = (imagen.data[i] + imagen.data[i+1] + imagen.data[i+2]) / 3;
     if(promedio<128){
