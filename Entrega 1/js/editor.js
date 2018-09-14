@@ -41,7 +41,6 @@ function getMousePos(canvas, evento){
 }
 
   function draw(canvas, posx, posy){
-    let ctx = canvas.getContext('2d');
     if(pintura){
       ctx.lineCap = "round"; //dibujo redondeado
        ctx.lineWidth = tamanio;//grosor
@@ -191,6 +190,26 @@ function getMousePos(canvas, evento){
       pixels[ i * 4 ] = ( r * .393 ) + ( g *.769 ) + ( b * .189 );
       pixels[ i * 4 + 1 ] = ( r * .349 ) + ( g *.686 ) + ( b * .168 );
       pixels[ i * 4 + 2 ] = ( r * .272 ) + ( g *.534 ) + ( b * .131 );
+    }
+    ctx.putImageData( imagen, 0, 0 );
+  }
+
+  //CONTRASTE
+  let contrast = 0;
+  let contraste = document.getElementById('contraste');
+  contraste.addEventListener("click", function (){
+    let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    cambiarColoresContraste(imgData, contrast);
+  });
+
+  function cambiarColoresContraste(imagen, contrast){
+    contrast += 10;
+    let factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+    for(let i=0;i<imagen.data.length;i+=4)
+    {
+        imagen.data[i] = factor * (imagen.data[i] - 128) + 128;
+        imagen.data[i+1] = factor * (imagen.data[i+1] - 128) + 128;
+        imagen.data[i+2] = factor * (imagen.data[i+2] - 128) + 128;
     }
     ctx.putImageData( imagen, 0, 0 );
   }
