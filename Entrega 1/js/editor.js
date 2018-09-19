@@ -5,7 +5,9 @@ let canvas = document.getElementById('canvas');
 let ctx = canvas.getContext('2d');
 let lastX = -1;
 let lastY = -1;
-
+let r = 0;
+let g = 0;
+let b = 0;
 //GROSOR LINEA
 let grosor = document.getElementById('grosor');
 grosor.addEventListener('change', function(e){
@@ -77,7 +79,6 @@ function getMousePos(canvas, evento){
     color = document.getElementById('colores').value;
   });
 
-
 //GUARDAR IMAGEN
   let guardarImagen = document.getElementById('guardar');
   guardarImagen.addEventListener('click', function(){
@@ -88,12 +89,14 @@ function getMousePos(canvas, evento){
 
 //DOCUMENTO NUEVO
   let nuevo = document.getElementById('nuevo');
-  nuevo.addEventListener('click', function canvasNuevo(){
+  nuevo.addEventListener('click', canvasNuevo);
+
+  function canvasNuevo(){
     let ctx = document.getElementById("canvas").getContext("2d");
     var imageData = ctx.createImageData(900, 450);
-
-  	for (x=0; x < 600; x++){
-  		for (y=0; y < 500; y++){
+    cargar.value = "";
+  	for (x=0; x < 900; x++){
+  		for (y=0; y < 450; y++){
   			SetPixel(imageData, x, y, 255, 255, 255, 255);
   		}
   	}
@@ -106,13 +109,15 @@ function getMousePos(canvas, evento){
   		imageData.data[index+2] = b;
   		imageData.data[index+3] = a;
   	}
-  });
+  }
 
 //CARGAR IMAGEN
   let cargar = document.getElementById('cargar');
-  cargar.addEventListener('change', cargarImagen, false);
-  //canvasNuevo(); hacer que antes de cargar una imagen se borre la anterior
+  cargar.addEventListener('change', cargarImagen);
   function cargarImagen(e){
+    if(cargar.value != ""){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
     let reader = new FileReader();
     reader.onload = function(event){
       let img = new Image();
@@ -132,6 +137,7 @@ function getMousePos(canvas, evento){
       }
       img.src = event.target.result;
     }
+    e.target.files[0] = "#";
     reader.readAsDataURL(e.target.files[0]);
   }
 
@@ -251,4 +257,74 @@ function cambiarColoresBinarizacion(imagen){
     }
   }
   ctx.putImageData(imagen, 0, 0);
+}
+
+//DETECCION DE BORDES
+let deteccion = document.getElementById('deteccion');
+deteccion.addEventListener("click", function (){
+  let imgDeteccion = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  let copia = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  bordes(imgDeteccion, copia);
+});
+
+function traerPixel(x, y, imagen){
+  let i = (x + y * imagen.width) * 4;
+  r = imagen.data[i];
+  g = imagen.data[i + 1];
+  b = imagen.data[i + 2];
+}
+
+function verificarHeight(x, y, imagen){
+  traerPixel(x, y, imagen);
+  let siguiente = y + 1;
+  let colorActual = Math.round((r + g + b)/3);
+  traerPixel(x, siguiente, imagen);
+  let colorSig = Math.round((r + g + b)/3);
+  if ((colorActual - colorSig) > 10){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function verificarWidth(x, y, imagen){
+  traerPixel(x, y, imagen);
+  let siguiente = x + 1;
+  let colorActual = Math.round((r + g + b)/3);
+  traerPixel(siguiente, y, imagen);
+  let colorSig = Math.round((r + g + b)/3);
+  if ((colorActual - colorSig) > 10){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function bordes(imagen, copia){
+  for(x = 0; x < imagen.width; x++){
+    for (y = 0; y < imagen.height; y++){
+      let i = (x + y * imagen.width) * 4;
+      if(verificarHeight(x, y, imagen)){
+	      copia.data[i+0] = 255;
+	      copia.data[i+1] = 255;
+	      copia.data[i+2] = 255;
+	      copia.data[i+3] = 255;
+      }
+      if(verificarWidth(x, y, imagen)){
+	      copia.data[i+0] = 255;
+	      copia.data[i+1] = 255;
+	      copia.data[i+2] = 255;
+	      copia.data[i+3] = 255;
+      }
+      else {
+        copia.data[i+0] = 0;
+	      copia.data[i+1] = 0;
+	      copia.data[i+2] = 0;
+	      copia.data[i+3] = 255;
+      }
+    }
+  }
+  ctx.putImageData(copia, 0, 0);
 }
