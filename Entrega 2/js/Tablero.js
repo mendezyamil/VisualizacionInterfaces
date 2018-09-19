@@ -32,11 +32,15 @@ class Tablero {
   cargarTablero(x, y, ctx){
     let ficha = new Ficha(x, y, "#000000");
     if (this.Matriz[x/100][y/100] == 1){
-      ficha.cambiarColor("#FFFFFF");
+      ficha.cambiarColor("#FF0000");
+      ficha.dibujarFicha(ctx);
+    }
+    else if(this.Matriz[x/100][y/100] == 2){
+      ficha.cambiarColor("#FFFF00");
       ficha.dibujarFicha(ctx);
     }
     else {
-      ficha.cambiarColor("#FF0000");
+      ficha.cambiarColor("#FFFFFF");
       ficha.dibujarFicha(ctx);
     }
   }
@@ -48,6 +52,7 @@ class Tablero {
     ctx.canvas.height = height;
     for (let x = 0; x < width; x += 100) {
         for (let y = 0; y < height; y += 100) {
+            ctx.fillStyle = "#FFFF00";
             ctx.moveTo(x, 0);
             ctx.lineTo(x, height);
             ctx.stroke();
