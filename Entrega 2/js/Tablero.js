@@ -29,37 +29,39 @@ class Tablero {
     }
   }
 
-  cargarTablero(x, y, ctx){
-    let ficha = new Ficha(x, y, "#000000");
-    if (this.Matriz[x/100][y/100] == 1){
+  cargarTablero(x, y, ctx, cuadrado, offsetX, offsetY){
+    let ficha = new Ficha((x * cuadrado) + offsetX, (y * cuadrado) + offsetY, "#000000");
+    if (this.Matriz[x][y] == 1){
       ficha.cambiarColor("#FF0000");
       ficha.dibujarFicha(ctx);
     }
-    else if(this.Matriz[x/100][y/100] == 2){
+    else if(this.Matriz[x][y] == 2){
       ficha.cambiarColor("#FFFF00");
       ficha.dibujarFicha(ctx);
     }
-    else {
+    else  if(this.Matriz[x][y] == 0){
       ficha.cambiarColor("#FFFFFF");
       ficha.dibujarFicha(ctx);
     }
   }
 
-  dibujarGrilla(width, height){
+  dibujarGrilla(){
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext('2d');
-    ctx.canvas.width  = width;
-    ctx.canvas.height = height;
-    for (let x = 0; x < width; x += 100) {
-        for (let y = 0; y < height; y += 100) {
-            ctx.fillStyle = "#FFFF00";
-            ctx.moveTo(x, 0);
-            ctx.lineTo(x, height);
+    let cuadrado = 74;
+    let offsetY = 156;
+    let offsetX = 341;
+    for (let x = 0; x <= this.columnas; x++) {
+        for (let y = 0; y <= this.filas; y++) {
+            ctx.moveTo(x * cuadrado + offsetX, offsetY);
+            ctx.lineTo(x * cuadrado + offsetX, (this.filas)*cuadrado + offsetY);
             ctx.stroke();
-            ctx.moveTo(0, y);
-            ctx.lineTo(width, y);
+            ctx.moveTo(offsetX, y * cuadrado + offsetY);
+            ctx.lineTo((this.columnas)*cuadrado + offsetX, y * cuadrado + offsetY);
             ctx.stroke();
-            this.cargarTablero(x, y, ctx);
+            if ((x < this.columnas) && (y < this.filas)){
+              this.cargarTablero(x, y, ctx, cuadrado, offsetX, offsetY);
+            }
         }
     }
   }
