@@ -45,9 +45,17 @@ class Tablero {
     }
   }
 
+  pintarGrilla(ctx){
+    ctx.fillStyle = "#000000";
+		//fillRect margen derecho, margen arriba, ancho, alto
+		ctx.fillRect(341, 156, 518, 555);
+		ctx.beginPath();
+  }
+
   dibujarGrilla(){
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext('2d');
+    this.pintarGrilla(ctx);
     let cuadrado = 74;
     let offsetY = 156;
     let offsetX = 341;
