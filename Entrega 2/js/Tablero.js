@@ -90,4 +90,39 @@ class Tablero {
     }
   }
 
+  //Verificar victoria horizontal
+  verificarHorizontal(jugador){
+    for (var x = 0; x < this.Matriz.length; x++) {
+      for (var y = 0; y < this.Matriz[x].length; y++) {
+        if(this.Matriz[y][x] == jugador){
+          if(this.Matriz[y+1][x] == jugador){
+            if(this.Matriz[y+2][x] == jugador){
+              if(this.Matriz[y+3][x] == jugador){
+                return true;
+              }
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  verificarVertical(jugador){
+    for (var x = 0; x < this.Matriz.length; x++) {
+      for (var y = 0; y < this.Matriz[x].length; y++) {
+        if(this.Matriz[x][y] == jugador){
+          if(this.Matriz[x][y+1] == jugador){
+            if(this.Matriz[x][y+2] == jugador){
+              if(this.Matriz[x][y+3] == jugador){
+                return true;
+              }
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
 }

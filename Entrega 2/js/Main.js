@@ -1,30 +1,49 @@
 let tablero = new Tablero();
 let jugador1 = new Jugador(21,1,"Yamil");
 let jugador2 = new Jugador(21,2,"Facundo");
+let ganadorHorizontal = false;
+let ganadorVertical = false;
 
 tablero.iniciarTablero();
-//hacer descontar fichas
-if (jugador1.jugar()){
-  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador1.numero));
-  console.log (jugador1.numero);
-}
 
-if (jugador1.jugar()){
-  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador1.numero));
-  console.log (jugador1.numero);
+function ganadorJuego(jugador){
+  console.log("Gano: " + jugador.nombre);
 }
-if (jugador1.jugar()){
-  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador1.numero));
-  console.log (jugador1.numero);
-}
-if (jugador1.jugar()){
-  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador1.numero));
-  console.log (jugador1.numero);
+//hacer descontar fichas
+if (jugador2.jugar()){
+  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador2.numero));
+  ganadorHorizontal = tablero.verificarHorizontal(jugador2.numero);
+  ganadorVertical = tablero.verificarVertical(jugador2.numero);
+  if ((ganadorVertical) || (ganadorHorizontal)){
+    ganadorJuego(jugador1);
+  }
 }
 
 if (jugador2.jugar()){
-  tablero.cargarFicha(1,tablero.buscarLibre(1), (jugador2.numero))
-  console.log (jugador2.numero);
+  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador2.numero));
+  ganadorHorizontal = tablero.verificarHorizontal(jugador2.numero);
+  ganadorVertical = tablero.verificarVertical(jugador2.numero);
+  if ((ganadorVertical) || (ganadorHorizontal)){
+    ganadorJuego(jugador2);
+  }
+}
+
+if (jugador2.jugar()){
+  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador2.numero));
+  ganadorHorizontal = tablero.verificarHorizontal(jugador2.numero);
+  ganadorVertical = tablero.verificarVertical(jugador2.numero);
+  if ((ganadorVertical) || (ganadorHorizontal)){
+    ganadorJuego(jugador2);
+  }
+}
+
+if (jugador2.jugar()){
+  tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador2.numero));
+  ganadorHorizontal = tablero.verificarHorizontal(jugador2.numero);
+  ganadorVertical = tablero.verificarVertical(jugador2.numero);
+  if ((ganadorVertical) || (ganadorHorizontal)){
+    ganadorJuego(jugador2);
+  }
 }
 
 tablero.dibujarGrilla();
