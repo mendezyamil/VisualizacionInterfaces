@@ -48,29 +48,46 @@ class Tablero {
   pintarGrilla(ctx){
     ctx.fillStyle = "#000000";
 		//fillRect margen derecho, margen arriba, ancho, alto
-		ctx.fillRect(341, 156, 518, 555);
+		ctx.fillRect(341, 0, 518, 555);
 		ctx.beginPath();
   }
 
   dibujarGrilla(){
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext('2d');
-    this.pintarGrilla(ctx);
-    let cuadrado = 74;
-    let offsetY = 156;
-    let offsetX = 341;
+    this.pintarGrilla(ctx); //fonde de la grilla
+    let cuadrado = 74; //longitud en pixeles de cada cuadrado
+    let offsetY = 0; //distancia en y 156
+    let offsetX = 341; //distancia en x
     for (let x = 0; x <= this.columnas; x++) {
-        for (let y = 0; y <= this.filas; y++) {
-            ctx.moveTo(x * cuadrado + offsetX, offsetY);
-            ctx.lineTo(x * cuadrado + offsetX, (this.filas)*cuadrado + offsetY);
-            ctx.stroke();
-            ctx.moveTo(offsetX, y * cuadrado + offsetY);
-            ctx.lineTo((this.columnas)*cuadrado + offsetX, y * cuadrado + offsetY);
-            ctx.stroke();
-            if ((x < this.columnas) && (y < this.filas)){
-              this.cargarTablero(x, y, ctx, cuadrado, offsetX, offsetY);
-            }
+      for (let y = 0; y <= this.filas; y++) {
+        ctx.moveTo(x * cuadrado + offsetX, offsetY);
+        ctx.lineTo(x * cuadrado + offsetX, (this.filas) * cuadrado + offsetY);
+        ctx.stroke();
+        ctx.moveTo(offsetX, y * cuadrado + offsetY);
+        ctx.lineTo((this.columnas) * cuadrado + offsetX, y * cuadrado + offsetY);
+        ctx.stroke();
+        if ((x < this.columnas) && (y < this.filas)){
+          this.cargarTablero(x, y, ctx, cuadrado, offsetX, offsetY); //dibujar almacenamiento para cada ficha
         }
+      }
     }
   }
+
+//Carga ficha en dicha posicion, matriz logica
+  cargarFicha(x, y, valor){
+    if ((x < this.columnas) && (y < this.filas)) {
+        this.Matriz[x][y] = valor;
+      }
+  }
+
+//Retorna primer posicion libre, de abajo para arriba
+  buscarLibre(x){
+   for (var y = this.filas-1; y < this.Matriz[x].length; y--) {
+    if (this.Matriz[x][y] == 0){
+      return y;
+      }
+    }
+  }
+
 }

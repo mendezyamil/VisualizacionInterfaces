@@ -8,6 +8,7 @@ class Jugador {
   jugar(){
     if (this.fichas > 0){
       this.fichas -= 1;
+      console.log(this.fichas);
       return true;
     }
     return false;
