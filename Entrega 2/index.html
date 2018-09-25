@@ -8,17 +8,31 @@
 	</head>
 	<body>
 		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-md-12">
+					<h1>4 IN ROW</h1>
+				</div>
+			</div>
       <div class="row justify-content-md-center">
-        <div class="col-md-2">
-        </div>
-        <div class="col-md-8" >
+        <div id="izquierdo" class="col-md-3">
+					<input id="input1" type="text" name="" value="" class="form-control">
 
         </div>
-        <div class="col-md-2">
+        <div id="centro1" class="col-md-1">
+					<a id="confirm1" class="btn btn-warning" href="#"><img src="image/apply.ico" alt="confirmar"></a>
+        </div>
+				<div class="col-md-2">
+
+        </div>
+				<div id="centro2" class="col-md-3">
+					<input id="input2" type="text" name="" value="" class="form-control">
+        </div>
+        <div id="derecho" class="col-md-1">
+					<a id="confirm2" class="btn btn-danger" href="#"><img src="image/apply.ico" alt="confirmar"></a>
         </div>
       </div>
     </div>
-		<canvas id="canvas" width="1200" height="445" style="">
+		<canvas id="canvas" width="1200" height="490" style="">
     <script src="js/Fichas.js"></script>
 		<script src="js/Jugadores.js"></script>
     <script src ="js/Tablero.js"></script>
