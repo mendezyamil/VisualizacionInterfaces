@@ -1,73 +1,40 @@
-let tablero = new Tablero();
-let jugador1;
-let jugador2;
-let ganadorHorizontal = false;
-let ganadorVertical = false;
-let turnoJugador1;
-let turnoJugador2;
-let comienzajuego = false;
+let jugador1 = new Jugador(1, "");
+let jugador2 = new Jugador(2, "");
+let juego = new Juego(jugador1,jugador2);
+let c = document.getElementById('canvas');
+let ctx = c.getContext('2d');
+juego.prepararJuego();
 
-tablero.iniciarTablero();
-tablero.dibujarGrilla();
-//tablero.cargarFichasJugador();
-
-//bloquear 42 fichas hasta que se carguen los dos jugadores y le toque el turno al jug1
 let btn1 = document.getElementById('confirm1');
 btn1.addEventListener('click', function(e){
-  let nombre1 = document.getElementById('input1').value;
-  jugador1 = new Jugador(21, 1, nombre1);
-  turnoJugador1 = false;
+    let nombre1 = document.getElementById('input1').value;
+    jugador1.nombre = nombre1;
 });
 
 let btn2 = document.getElementById('confirm2');
 btn2.addEventListener('click', function(e){
-  let nombre2 = document.getElementById('input2').value;
-  jugador2 = new Jugador(21, 2, nombre2);
-  turnoJugador2 = false;
+    let nombre2 = document.getElementById('input2').value;
+    jugador2.nombre = nombre2;
 });
 
-function ganadorJuego(jugador){
-  console.log("Gano: " + jugador.nombre);
-}
-//hacer descontar fichas
-if (!turnoJugador1 && !turnoJugador2){
-  comienzaJuego = true;
-  turnoJugador1 = true;
-  if (jugador1){
-    //habilitar fichas jug1
-    if (jugador1.jugar() && !ganadorHorizontal && !ganadorVertical){
-      tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador1.numero));
-      ganadorHorizontal = tablero.verificarHorizontal(jugador1.numero);
-      ganadorVertical = tablero.verificarVertical(jugador1.numero);
-      if ((ganadorVertical) || (ganadorHorizontal)){
-        ganadorJuego(jugador1);
-      }
-      turnoJugador1 = false;
-      turnoJugador2 = true;
+c.addEventListener("mousedown",function(event){
+    let x = event.layerX - event.currentTarget.offsetLeft;
+    let y = event.layerY - event.currentTarget.offsetTop;
+    juego.jugar(x,y);
+});
+
+canvas.addEventListener('mousemove',function(event){
+    let x = event.layerX - event.currentTarget.offsetLeft;
+    let y = event.layerY - event.currentTarget.offsetTop;
+    if(juego.turnoJugador.ficha != false){
+        juego.turnoJugador.ficha.mueveMouse(x,y,juego);
     }
-  }
-  if (jugador2){
-    //doblear fichas jug1
-    //habilitar fichas jug2
-    if (jugador2.jugar() && !ganadorHorizontal && !ganadorVertical){
-      tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador2.numero));
-      ganadorHorizontal = tablero.verificarHorizontal(jugador2.numero);
-      ganadorVertical = tablero.verificarVertical(jugador2.numero);
-      if ((ganadorVertical) || (ganadorHorizontal)){
-        ganadorJuego(jugador2);
-      }
-      turnoJugador2 = false;
+});
+
+canvas.addEventListener('mouseup', function(event){
+    let x = event.layerX - event.currentTarget.offsetLeft;
+    let y = event.layerY - event.currentTarget.offsetTop;
+    if(juego.turnoJugador.ficha != false){
+        juego.jugarFicha(x,y);
     }
-  }
-
-}
-
-
-// if (jugador2.jugar()){
-//   tablero.cargarFicha(0,tablero.buscarLibre(0), (jugador2.numero));
-//   ganadorHorizontal = tablero.verificarHorizontal(jugador2.numero);
-//   ganadorVertical = tablero.verificarVertical(jugador2.numero);
-//   if ((ganadorVertical) || (ganadorHorizontal)){
-//     ganadorJuego(jugador2);
-//   }
-// }
+});

@@ -1,18 +1,27 @@
+body{
+    background-image: url('../image/background.jpg');
+    font-family: 'Aclonica';font-size: 22px;
+}
+
 #canvas{
-  border: #000000 solid 1px;
-  background-color: #151515;
-  margin-top: 20px;
-  margin-left: 80px;
+    border: #000000 solid 1px;
+    background-color: #151515;
+    margin-top: 20px;
+    opacity: 0.8;
+    border-radius: 25px;
+    box-shadow: 0 15px 20px 10px #000000;
 }
 
 #derecho, #izquierdo, #centro1, #centro2{
-  margin-top: 20px;
-}
-
-.container{
-  margin-left: 100px;
+    margin-top: 20px;
 }
 
 h1{
-  text-align: center;
+    font-size: 80px;
+    text-align: center;
+    text-shadow: 1px 1px 8px #0033aa;
+}
+
+h2{
+    text-align: center;
 }

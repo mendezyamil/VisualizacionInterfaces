@@ -1,41 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-		<link rel="stylesheet" href="css/entrega2.css">
-		<title>Entrega 2</title>
-	</head>
-	<body>
-		<div class="container">
-			<div class="row justify-content-md-center">
-				<div class="col-md-12">
-					<h1>4 IN ROW</h1>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link href='https://fonts.googleapis.com/css?family=Aclonica' rel='stylesheet'>
+	<link rel="stylesheet" href="css/entrega2.css">
+	<title>Entrega 2</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="row justify-content-md-center">
+					<div class="col">
+						<h1>4 IN ROW</h1>
+					</div>
+				</div>
+				<div class="row justify-content-md-center">
+					<div class="col-md-4">
+						<div class="row">
+							<div id="izquierdo" class="col-md-8">
+								<input id="input1" type="text" name="" value="" placeholder="Nombre jugador 1" class="form-control">
+
+							</div>
+							<div id="centro1" class="col-md-4">
+								<a id="confirm1" class="btn btn-warning" href="#"><img src="image/apply.ico" alt="confirmar"></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<h2 id="ganador"></h2>
+					</div>
+					<div class="col-md-4">
+						<div class="row">
+							<div id="centro2" class="col-md-8">
+								<input id="input2" type="text" name="" value="" placeholder="Nombre jugador 2" class="form-control">
+							</div>
+							<div id="derecho" class="col-md-4">
+								<a id="confirm2" class="btn btn-danger" href="#"><img src="image/apply.ico" alt="confirmar"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<canvas id="canvas" width="1100" height="490" style="">
+						</div>
+					</div>
 				</div>
 			</div>
-      <div class="row justify-content-md-center">
-        <div id="izquierdo" class="col-md-3">
-					<input id="input1" type="text" name="" value="" class="form-control">
-
-        </div>
-        <div id="centro1" class="col-md-1">
-					<a id="confirm1" class="btn btn-warning" href="#"><img src="image/apply.ico" alt="confirmar"></a>
-        </div>
-				<div class="col-md-2">
-
-        </div>
-				<div id="centro2" class="col-md-3">
-					<input id="input2" type="text" name="" value="" class="form-control">
-        </div>
-        <div id="derecho" class="col-md-1">
-					<a id="confirm2" class="btn btn-danger" href="#"><img src="image/apply.ico" alt="confirmar"></a>
-        </div>
-      </div>
-    </div>
-		<canvas id="canvas" width="1200" height="490" style="">
-    <script src="js/Fichas.js"></script>
+		</div>
+		<script src="js/Fichas.js"></script>
 		<script src="js/Jugadores.js"></script>
-    <script src ="js/Tablero.js"></script>
+		<script src ="js/Tablero.js"></script>
+		<script src ="js/Juego.js"></script>
 		<script src="js/Main.js"></script>
 	</body>
-</html>
+	</html>
