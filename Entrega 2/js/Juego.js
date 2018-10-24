@@ -23,12 +23,12 @@ class Juego {
                 let ficha;
                 if(i == 1){
                     let offset = this.calcularOffset(i,y);
-                    ficha = new Ficha(35, 35, "#FFFF00", this.jugador1.numero,offset);
+                    ficha = new Ficha(35, 35, "#FFFF00", this.jugador1.numero,offset, "image/ficha2.png");
                     this.jugador1.cargarFichas(y,ficha);
                 }
                 else {
                     let offset = this.calcularOffset(i,y);
-                    ficha = new Ficha(35, 35, "#FF0000", this.jugador2.numero,offset);
+                    ficha = new Ficha(35, 35, "#FF0000", this.jugador2.numero,offset, "image/ficha1.png");
                     this.jugador2.cargarFichas(y,ficha);
                 }
                 ficha.dibujarFicha();
@@ -49,7 +49,7 @@ class Juego {
         let ctx = c.getContext('2d');
         ctx.beginPath();
         ctx.globalCompositeOperation = "destination-out";
-        ctx.arc(ficha.offset.x, ficha.offset.y, ficha.radio, 0, Math.PI * 2);
+        ctx.arc(ficha.offset.x+20, ficha.offset.y+20, ficha.radio, 0, Math.PI * 2);
         ctx.fill();
         ctx.closePath();
         ctx.globalCompositeOperation = "source-over";
@@ -57,11 +57,13 @@ class Juego {
     }
 
     jugarFicha(x,y){
-
         let ficha = this.turnoJugador.ficha.levantaMouse(x,y);
-        let posOriginal = {x:ficha.posX, y:ficha.posY};
+        let posOriginal = {x:ficha.posX, y:ficha.posY}; //guarda posicion
         let isFichaJugada = this.tablero.obtenerColumna(ficha);
+
         if(isFichaJugada){
+            this.turnoJugador.fichas.shift();
+            console.log(this.turnoJugador.fichas.length);
             let ganador = this.tablero.verificarGanador(this.turnoJugador.numero);
             if(ganador){
                 document.getElementById('ganador').innerHTML = this.turnoJugador.nombre+" es el ganador!";

@@ -1,6 +1,6 @@
 class Ficha {
 
-    constructor(x, y, paramcolor, tipo, offset) {
+    constructor(x, y, paramcolor, tipo, offset, src) {
         this.posX = x;
         this.posY = y;
         this.color = paramcolor;
@@ -8,13 +8,20 @@ class Ficha {
         this.id = tipo;
         this.offset = offset;
         this.clicked = false;
+        this.img = new Image();
+        this.img.src = src;
     }
 
     cambiarColor(color){
         this.color = color;
     }
 
+    cambiarImagen(src){
+        this.img.src = src;
+    }
+
     dibujarFichaEnTablero(ctx, offset){
+
         ctx.fillStyle = this.color;
         ctx.beginPath();
         let M = Math.floor((Math.sqrt(((offset.x)*(offset.x)) + ((offset.y)*(offset.y))))/2); //calcular a partir de donde dibujar el circulo
@@ -22,16 +29,20 @@ class Ficha {
         ctx.fill();
         ctx.stroke();
         ctx.closePath();
+        ctx.drawImage(this.img,this.posX,this.posY, 62, 62);
     }
 
     dibujarFicha(){
         let ctx = document.getElementById('canvas').getContext('2d');
-        ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.arc(this.offset.x, this.offset.y, this.radio, 0, Math.PI *2);
-        ctx.fill();
-        ctx.stroke();
-        ctx.closePath();
+        let fichin = this;
+        this.img.onload = function(){
+            ctx.drawImage(fichin.img, fichin.offset.x, fichin.offset.y, fichin.radio, fichin.radio);
+        }
+    }
+
+    dragFicha(){
+        let ctx = document.getElementById('canvas').getContext('2d');
+        ctx.drawImage(this.img, this.offset.x, this.offset.y, this.radio, this.radio);
     }
 
     isClicked(x,y){
@@ -49,7 +60,7 @@ class Ficha {
     borrar(){
         let canvas = document.getElementById('canvas');
         let ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(this.offset.x, this.offset.y, 35, 35);
     }
 
     mueveMouse(x,y,juego){
@@ -58,14 +69,16 @@ class Ficha {
         juego.reDibujar();
         this.offset.x=x;
         this.offset.y=y;
-        this.dibujarFicha();
+        this.dragFicha();
     }
 
     levantaMouse(x,y){
         this.offset.x=x;
         this.offset.y=y;
         this.clicked = false;
-        this.borrar();
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         return this;
     }
 }

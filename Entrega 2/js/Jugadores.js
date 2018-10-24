@@ -1,9 +1,10 @@
 class Jugador {
-    constructor(numeroJugador, nombreJugador) {
+    constructor(numeroJugador, nombreJugador, direccion) {
         this.fichas = [];
         this.numero = numeroJugador;
         this.nombre = nombreJugador;
         this.ficha = false;
+        this.direccion = direccion;
     }
 
     cargarFichas(pos,ficha){

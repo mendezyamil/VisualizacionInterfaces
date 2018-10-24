@@ -24,9 +24,11 @@ class Tablero {
         let offsetFicha = {x:46,y:46};
         if (this.Matriz[x][y] == 2){
             ficha.cambiarColor("#FF0000");
+            ficha.cambiarImagen("image/ficha1.png");
         }
         else if(this.Matriz[x][y] == 1){
             ficha.cambiarColor("#FFFF00");
+            ficha.cambiarImagen("image/ficha2.png");
         }
         else if(this.Matriz[x][y] == 0){
             ficha.cambiarColor("#FFFFFF");

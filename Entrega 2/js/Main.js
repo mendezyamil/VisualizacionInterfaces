@@ -1,5 +1,5 @@
-let jugador1 = new Jugador(1, "");
-let jugador2 = new Jugador(2, "");
+let jugador1 = new Jugador(1, "", "image/ficha2.png");
+let jugador2 = new Jugador(2, "", "image/ficha1.png");
 let juego = new Juego(jugador1,jugador2);
 let c = document.getElementById('canvas');
 let ctx = c.getContext('2d');
