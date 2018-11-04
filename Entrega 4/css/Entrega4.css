@@ -68,13 +68,17 @@ body {
 }
 
 #game, #menu, #juego {
+  position: absolute;
   height: 700px;
   margin: 0 auto;
   background-color: #2e2e36;
 }
 
+#menu{
+  left: 710px;
+}
+
 #game, #juego{
-  float:left;
   overflow: hidden;
   width: 600px;
   box-shadow: 0 15px 4em 1em #181727;
@@ -87,12 +91,13 @@ body {
   position: absolute;
   overflow: hidden;
   background-image: url("../image/ruta.png");
+  background-size: cover;
   background-repeat: repeat;
   background-position: center;
 }
 
 .background{
-  animation: background-animation linear 5s infinite;
+  animation: background-animation linear  .8s infinite;
 }
 
 @keyframes background-animation {
@@ -121,8 +126,8 @@ body {
 
 .auto{
   position: absolute;
-  width: 47px;
-  height: 100px;
+  width: 50px;
+  height: 101px;
   bottom: 20px;
   left: 378px;
   background-image: url("../image/car.png");
@@ -132,13 +137,13 @@ body {
 
 .policia{
   position: absolute;
-  width: 100px;
-  height: 94px;
+  width: 50px;
+  height: 107px;
   background-image: url("../image/police.png");
   background-size: auto;
   background-repeat: no-repeat;
   bottom: 700px;
-  left: 201px;;
+  left: 201px;
 }
 
 .animacionPolicia {

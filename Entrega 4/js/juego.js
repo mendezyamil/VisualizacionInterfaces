@@ -4,7 +4,7 @@ class Juego {
     this.width = 600;
     this.height = 700;
     this.comenzado = false;
-    this.count_enemigos = 0;
+    this.cantidadPolicia = 0;
     this.score = 0;
   }
 
@@ -21,14 +21,15 @@ class Juego {
       if (!this.comenzado){
         clearInterval(intervalo);
       }
-      let policia = new Policia(this.count_enemigos);
-      this.count_enemigos++;
-      let pos = parseInt(Math.random() * (500 - 0) + 0);
+
+      let policia = new Policia(this.cantidadPolicia);
+      this.cantidadPolicia++;
+      let pos = parseInt(Math.random() * (650 - 150) + 150);
       let posX = pos + "px";
+
       policia.crearPolicia(posX, "700px");
 
       let police = policia.id;
-
       document.getElementById(police).addEventListener("animationend", function () {
         this.remove();
         juego.score+=100;
@@ -44,19 +45,19 @@ class Juego {
       let posY = parseInt(estilo.bottom, 10);
       switch (direccion) {
         case "left":
-          if (posX > 201){
+          if (posX > 20){
             posX -= desplazamiento;
             estilo.left = posX + "px";
           }
         break;
         case "right":
-          if (posX < this.width - this.auto.width){
+          if (posX < this.width - this.auto.width - 20){
             posX += desplazamiento;
             estilo.left = posX + "px";
           }
         break;
           case "up":
-          if (posY < this.width - this.auto.width ){
+          if (posY < this.width - this.auto.width + 30){
             posY += desplazamiento;
             estilo.bottom = posY + "px";
           }
