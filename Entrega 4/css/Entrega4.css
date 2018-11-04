@@ -67,16 +67,25 @@ body {
   box-shadow: 0 15px 4em 1em #181727;
 }
 
-#game, #menu {
+#game, #menu, #juego {
   height: 700px;
   margin: 0 auto;
   background-color: #2e2e36;
 }
 
-#game{
+#game, #juego{
   float:left;
+  overflow: hidden;
   width: 600px;
   box-shadow: 0 15px 4em 1em #181727;
+  background-image: url("../image/icono.png");
+  background-repeat: repeat;
+  background-position: center;
+}
+
+#juego{
+  position: absolute;
+  overflow: hidden;
   background-image: url("../image/ruta.png");
   background-repeat: repeat;
   background-position: center;
@@ -99,12 +108,50 @@ body {
   width: 320px;
 }
 
-.avatar{
+.score {
+  margin: 50px 0;
+}
+
+#start {
+  background-color: #f4cd41;
+  color: black;
+  font-size: 50px;
+  margin: 50px 0 50px 45px;
+}
+
+.auto{
+  position: absolute;
   width: 47px;
   height: 100px;
   bottom: 20px;
-  left: 276px;
+  left: 378px;
   background-image: url("../image/car.png");
   background-size: auto;
   background-repeat: no-repeat;
+}
+
+.policia{
+  position: absolute;
+  width: 100px;
+  height: 94px;
+  background-image: url("../image/police.png");
+  background-size: auto;
+  background-repeat: no-repeat;
+  bottom: 700px;
+  left: 201px;;
+}
+
+.animacionPolicia {
+  animation: caer linear;
+  animation-duration: 3s;
+}
+
+@keyframes caer {
+  from {
+    transform: translate();
+  }
+
+  to {
+    transform: translate(0px, 800px);
+  }
 }
