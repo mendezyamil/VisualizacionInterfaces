@@ -17,7 +17,12 @@ class Juego {
     this.crearPolicia();
   }
 
+  explotar(){
+    document.getElementById("auto").classList.add("explotar");
+  }
+
   gameOver(){
+    explotar();
     this.comenzado = false;
     setTimeout(() => {
       document.getElementById("auto").remove();
