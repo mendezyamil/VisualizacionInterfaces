@@ -25,7 +25,11 @@ class Juego {
   }
 
   gameOver(){
+<<<<<<< HEAD
     juego.explotar();
+=======
+    explotar();
+>>>>>>> ecc67f00f218da2dfa8455df200f1dd8922b329e
     this.comenzado = false;
     let boton = document.getElementById('restart');
     boton.disabled = false;
