@@ -7,7 +7,7 @@ class Auto {
 
   crearAuto(game){
     document.getElementById("game").innerHTML += this.div;
-    this.cargarPosicion("378px","20px");
+    this.cargarPosicion("270px","20px");
   }
 
   cargarPosicion(x, y){
@@ -17,7 +17,7 @@ class Auto {
   }
 
   traerPosicion(){
-    
+
   }
 
 }

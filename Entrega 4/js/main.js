@@ -1,6 +1,12 @@
 let juego = new Juego();
+let boton = document.getElementById('restart');
+boton.disabled = true;
 
 document.getElementById("start").addEventListener("click", function(){
+    juego.comienzoJuego();
+});
+
+document.getElementById("restart").addEventListener("click", function(){
     juego.comienzoJuego();
 });
 

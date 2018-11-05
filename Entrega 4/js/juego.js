@@ -7,9 +7,12 @@ class Juego {
     this.cantidadPolicia = 0;
     this.score = 0;
     this.intervalos = [];
+    this.highScore = 0;
   }
 
   comienzoJuego(){
+    let boton = document.getElementById('restart');
+    boton.disabled = true;
     document.getElementById("game").innerHTML += '<div id="juego" class="background"></div>';
     document.getElementById("score").innerHTML = 0;
     this.comenzado = true;
@@ -17,8 +20,19 @@ class Juego {
     this.crearPolicia();
   }
 
+  explotar(){
+    document.getElementById("auto").classList.add("explotar");
+  }
+
   gameOver(){
+    juego.explotar();
     this.comenzado = false;
+    let boton = document.getElementById('restart');
+    boton.disabled = false;
+    if (this.score > this.highScore){
+      this.highScore = this.score;
+      document.getElementById("highScore").innerHTML = juego.highScore;
+    }
     setTimeout(() => {
       document.getElementById("auto").remove();
 
@@ -29,7 +43,7 @@ class Juego {
       $(".policia").remove();
       document.getElementById("juego").classList.remove("background");
 
-      let derrota = "<h1 id='gameOver' class='gameOver'>Perdiste</h1>";
+      let derrota = "<h1 id='derrota' class='derrota'>Perdiste</h1>";
       $("#juego").append(derrota);
 
       this.cantidadPolicia = 0;

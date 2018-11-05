@@ -9,8 +9,6 @@ body {
   color: #f6fff5;
 }
 
-
-
 .container {
   background-color: #1c1f3e;
   width: 1500px;
@@ -67,6 +65,14 @@ body {
   box-shadow: 0 15px 4em 1em #181727;
 }
 
+h1, h2, h3{
+  margin-left: 10px;
+}
+
+img{
+  margin-left: 10px;
+}
+
 #game, #menu, #juego {
   position: absolute;
   height: 700px;
@@ -121,7 +127,15 @@ body {
   background-color: #f4cd41;
   color: black;
   font-size: 50px;
-  margin: 50px 0 50px 45px;
+  margin: 0px 0 50px 20%;
+}
+
+#restart{
+  margin: 0px 0 50px 35%;
+}
+
+.controls {
+  margin-left: 10px;
 }
 
 .auto{
@@ -159,4 +173,30 @@ body {
   to {
     transform: translate(0px, 800px);
   }
+}
+
+.explotar {
+  width: 100px;
+  height: 100px;
+  background: url("../image/explosion2.png");
+  animation: explosion 2s steps(4);
+}
+
+@keyframes explosion {
+  0% {
+    background-position-y: 0px;
+    background-position-x: 0px;
+  }
+  100% {
+    background-position-y: -512px;
+    background-position-x: -512px;
+  }
+}
+
+#derrota{
+  margin-left: 10%;
+  margin-top: 50%;
+  font-size: 100px;
+  color: red;
+  text-shadow: -5px -5px 5px black;
 }

@@ -48,18 +48,21 @@
             </div>
             <div id="menu">
               <div class="row">
-                <div class="col score">
+                <div id="puntaje" class="col score">
+                  <h3>High Score: <span id='highScore'>0</span></h3>
                   <h1>Score: <span id="score">0</span></h1>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
-                  <button type="button" class="btn btn-primary button" id="start">Start</button>
-                </div>
+                  <div class="botones">
+                    <button type="button" class="btn btn-primary button" id="start">Start</button>
+                    <button type="button" class="btn btn-primary button" id="restart">Restart</button>
+                  </div>
               </div>
               <div class="row">
                 <div class="col controls">
-                  <h1>Controles: </h1>
+                  <h1 id="controles">Controles: </h1>
                   <img src="image/controles.png" alt="controles">
                 </div>
               </div>
