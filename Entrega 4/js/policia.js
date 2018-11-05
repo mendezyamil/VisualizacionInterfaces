@@ -1,9 +1,9 @@
 class Policia {
-  constructor(count) {
-    this.div = '<div id="policia' + count + '" class="policia animacionPolicia"></div>';
+  constructor(cantidad) {
+    this.div = '<div id="policia' + cantidad + '" class="policia animacionPolicia"></div>';
     this.width = 100;
     this.height = 94;
-    this.id = "policia" + count;
+    this.id = "policia" + cantidad;
   }
 
   crearPolicia(x, y){
