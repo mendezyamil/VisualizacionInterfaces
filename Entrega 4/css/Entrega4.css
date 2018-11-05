@@ -115,6 +115,29 @@ img{
   }
 }
 
+#niebla{
+  margin-left: 35px;
+  position: absolute;
+  width: 500px;
+  height: 700px;
+  background-image: url("../image/smoke.png");
+  background-position: center;
+  background-repeat: repeat;
+}
+
+.niebla{
+  animation: niebla-animation linear .8s infinite;
+}
+
+@keyframes niebla-animation {
+  from{
+    background-position: 0px 700px;
+  }
+  to{
+    background-position: 0px 0px;
+  }
+}
+
 #menu{
   width: 320px;
 }
@@ -193,7 +216,7 @@ img{
   }
 }
 
-#derrota{
+#loser{
   margin-left: 10%;
   margin-top: 50%;
   font-size: 100px;

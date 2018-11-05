@@ -8,12 +8,13 @@ class Juego {
     this.score = 0;
     this.intervalos = [];
     this.highScore = 0;
+    this.niebla = '<div id="niebla" class="niebla"></div>'
   }
 
   comienzoJuego(){
     let boton = document.getElementById('restart');
     boton.disabled = true;
-    document.getElementById("game").innerHTML += '<div id="juego" class="background"></div>';
+    document.getElementById("game").innerHTML += '<div id="juego" class="background">' + this.niebla + '</div>';
     document.getElementById("score").innerHTML = 0;
     this.comenzado = true;
     this.auto.crearAuto(this);
@@ -35,6 +36,7 @@ class Juego {
     }
     setTimeout(() => {
       document.getElementById("auto").remove();
+      document.getElementById("niebla").remove();
 
       for(let i = 0; i< this.intervalos.length; i++){
           clearInterval(this.intervalos[i]);
@@ -43,8 +45,8 @@ class Juego {
       $(".policia").remove();
       document.getElementById("juego").classList.remove("background");
 
-      let derrota = "<h1 id='derrota' class='derrota'>Perdiste</h1>";
-      $("#juego").append(derrota);
+      let loser = "<h1 id='loser' class='loser'>Perdiste</h1>";
+      $("#juego").append(loser);
 
       this.cantidadPolicia = 0;
       this.intervalos = [];
@@ -70,24 +72,13 @@ class Juego {
         left: datosPolicia.left,
         right: datosPolicia.right
       }
-    //   let caso1 = posPolicia.left < posAuto.left && posAuto.left < posPolicia.right;
-    //   let caso2 = posPolicia.left < posAuto.right && posAuto.right < posPolicia.right;
-    //   let caso3 = posPolicia.top < posAuto.top && posAuto.top < posPolicia.bottom;
-    //   let caso4 = posPolicia.top < posAuto.bottom && posAuto.bottom < posPolicia.bottom;
-    //
-    //   if ((caso1 || caso2) && (caso3 || caso4)) {
-    //     console.log("entro2");
-    //     this.gameOver();
-    //   }
-    if ((posPolicia.left < posAuto.left && posAuto.left < posPolicia.right) || (posPolicia.left < posAuto.right && posAuto.right < posPolicia.right)){
-      if((posPolicia.top < posAuto.top && posAuto.top < posPolicia.bottom) || (posPolicia.top < posAuto.bottom && posAuto.bottom < posPolicia.bottom)){
-        this.gameOver();
+
+      if ((posPolicia.left < posAuto.left && posAuto.left < posPolicia.right) || (posPolicia.left < posAuto.right && posAuto.right < posPolicia.right)){
+        if((posPolicia.top < posAuto.top && posAuto.top < posPolicia.bottom) || (posPolicia.top < posAuto.bottom && posAuto.bottom < posPolicia.bottom)){
+          this.gameOver();
+        }
       }
     }
-  }
-
-
-
   }
 
   crearPolicia(){

@@ -16,8 +16,4 @@ class Auto {
     estilo.bottom = y;
   }
 
-  traerPosicion(){
-
-  }
-
 }
