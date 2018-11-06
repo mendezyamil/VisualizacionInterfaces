@@ -103,7 +103,7 @@ img{
 }
 
 .background{
-  animation: background-animation linear  3s infinite;
+  animation: background-animation linear  8s infinite;
 }
 
 @keyframes background-animation {
@@ -161,11 +161,11 @@ img{
 }
 
 .animacionPolicia {
-  animation: caer linear;
+  animation: aparecer linear;
   animation-duration: 3s;
 }
 
-@keyframes caer {
+@keyframes aparecer {
   from {
     transform: translate();
   }

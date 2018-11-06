@@ -37,7 +37,9 @@ class Juego {
       document.getElementById("auto").remove();
 
       for(let i = 0; i< this.intervalos.length; i++){
+        console.log(this.intervalos[i]);
           clearInterval(this.intervalos[i]);
+          console.log("hola",this.intervalos[i]);
       }
 
       $(".policia").remove();
