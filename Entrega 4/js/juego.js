@@ -8,13 +8,12 @@ class Juego {
     this.score = 0;
     this.intervalos = [];
     this.highScore = 0;
-    this.niebla = '<div id="niebla" class="niebla"></div>'
   }
 
   comienzoJuego(){
     let boton = document.getElementById('restart');
     boton.disabled = true;
-    document.getElementById("game").innerHTML += '<div id="juego" class="background">' + this.niebla + '</div>';
+    document.getElementById("game").innerHTML += '<div id="juego" class="background"></div>';
     document.getElementById("score").innerHTML = 0;
     this.comenzado = true;
     this.auto.crearAuto(this);
@@ -36,7 +35,6 @@ class Juego {
     }
     setTimeout(() => {
       document.getElementById("auto").remove();
-      document.getElementById("niebla").remove();
 
       for(let i = 0; i< this.intervalos.length; i++){
           clearInterval(this.intervalos[i]);
@@ -52,7 +50,7 @@ class Juego {
       this.intervalos = [];
       this.score = 0;
       document.getElementById("score").innerHTML = juego.score;
-    }, 1000);
+    }, 2000);
   }
 
   verificarColision(police){

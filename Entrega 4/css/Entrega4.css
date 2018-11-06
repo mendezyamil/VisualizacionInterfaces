@@ -96,45 +96,22 @@ img{
 #juego{
   position: absolute;
   overflow: hidden;
-  background-image: url("../image/ruta.png");
-  background-size: cover;
-  background-repeat: repeat;
-  background-position: center;
+  background-image: url("../image/fog.png"), url("../image/ruta.png");
+  background-size: cover, cover;
+  background-repeat: repeat, repeat;
+  background-position: center, center;
 }
 
 .background{
-  animation: background-animation linear  .8s infinite;
+  animation: background-animation linear  3s infinite;
 }
 
 @keyframes background-animation {
   from{
-    background-position: 0px 0px;
+    background-position: 0px 0px, 0px 0px;
   }
   to{
-    background-position: 0px 700px;
-  }
-}
-
-#niebla{
-  margin-left: 35px;
-  position: absolute;
-  width: 500px;
-  height: 700px;
-  background-image: url("../image/smoke.png");
-  background-position: center;
-  background-repeat: repeat;
-}
-
-.niebla{
-  animation: niebla-animation linear .8s infinite;
-}
-
-@keyframes niebla-animation {
-  from{
-    background-position: 0px 700px;
-  }
-  to{
-    background-position: 0px 0px;
+    background-position: 0px 2100px, 0px 4200px;
   }
 }
 
@@ -199,20 +176,28 @@ img{
 }
 
 .explotar {
-  width: 100px;
-  height: 100px;
+  width: 128px;
+  height: 128px;
   background: url("../image/explosion2.png");
-  animation: explosion 2s steps(4);
+  animation: explosionX .5s steps(4) 4 none,
+  explosionY 2s steps(4) 1 none;
 }
 
-@keyframes explosion {
-  0% {
-    background-position-y: 0px;
+@keyframes explosionX {
+  from {
     background-position-x: 0px;
   }
-  100% {
-    background-position-y: -512px;
+  to {
     background-position-x: -512px;
+  }
+}
+
+@keyframes explosionY {
+  from {
+    background-position-y: 0px;
+  }
+  to {
+    background-position-y: -512px;
   }
 }
 
