@@ -18,7 +18,6 @@ body {
   font-family: "bankGothic";
   color: #f6fff5;
 }
-
 /* para ocultar el scroll */
 ::-webkit-scrollbar {
   display: none;
